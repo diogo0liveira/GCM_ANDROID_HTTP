@@ -7,6 +7,8 @@ package com.diogo.mobile.app.util;
  */
 public class Extras
 {
+    public static String TAG = "GCM CLIENT HTTP";
+
     public static String SERVER_KEY = "AIzaSyBCbJ-6yxE6XJdyLIbG7Cq-ts6MPVT1sVo";
     public static String SENDER_ID = "204148401491";
     public static String SERVER = "http://172.16.7.38:8080/PERSONAL_ORGANIZER/resources/cliente";
