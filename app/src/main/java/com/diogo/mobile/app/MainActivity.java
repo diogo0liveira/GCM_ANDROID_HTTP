@@ -22,7 +22,11 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.gson.Gson;
 
+import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.math.BigInteger;
+import java.text.DateFormat;
 
 public class MainActivity extends AppCompatActivity implements ResultResponse
 {
@@ -31,6 +35,10 @@ public class MainActivity extends AppCompatActivity implements ResultResponse
     private TextView textViewCode;
     private TextView textViewMethod;
     private TextView textViewJson;
+
+    private TextView textViewCliente;
+    private TextView textViewId;
+    private TextView textViewDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -43,6 +51,9 @@ public class MainActivity extends AppCompatActivity implements ResultResponse
         textViewCode = (TextView)findViewById(R.id.acti_main_textView_code);
         textViewMethod = (TextView)findViewById(R.id.acti_main_textView_method);
         textViewJson = (TextView)findViewById(R.id.acti_main_textView_json);
+        textViewCliente = (TextView)findViewById(R.id.acti_main_textView_cliente);
+        textViewId = (TextView)findViewById(R.id.acti_main_textView_id);
+        textViewDate = (TextView)findViewById(R.id.acti_main_textView_date);
 
         FloatingActionButton floatingActionButton = (FloatingActionButton)findViewById(R.id.acti_main_fab);
         floatingActionButton.setOnClickListener(new View.OnClickListener()
@@ -136,12 +147,32 @@ public class MainActivity extends AppCompatActivity implements ResultResponse
         textViewCode.setText(String.format("CODE: %d", jsonRequest.getResponseStatusCode()));
         textViewMethod.setText(String.format("METHOD: %s", strMethod));
         textViewJson.setText(new Gson().toJson(jsonObject));
+
+        try
+        {
+            textViewCliente.setText("[CLIENTE]");
+            textViewId.setText(String.format("ID: %d", jsonObject.getInt("id")));
+            textViewDate.setText(String.format("DATE: %s", DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.DEFAULT).format(jsonObject.getLong("registrationDate"))));
+        }
+        catch(JSONException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void error(VolleyError volleyError)
     {
+        if(volleyError.getCause().getMessage() != null)
+        {
+            textViewCode.setText(volleyError.getCause().getMessage());
+        }
 
+        textViewMethod.setText("");
+        textViewJson.setText("");
+        textViewCliente.setText("");
+        textViewId.setText("");
+        textViewDate.setText("");
     }
 
     private boolean isPlayServices()

@@ -1,5 +1,8 @@
 package com.diogo.mobile.app.model;
 
+import java.math.BigInteger;
+import java.sql.Date;
+
 /**
  * Created on 08/10/2015 16:24.
  *
@@ -9,7 +12,7 @@ public class Cliente
 {
     private int id;
     private String registrationId;
-    private long registrationDate;
+    private BigInteger registrationDate;
 
     public Cliente(String registrationId)
     {
@@ -36,12 +39,12 @@ public class Cliente
         this.registrationId = registrationId;
     }
 
-    public long getRegistrationDate()
+    public BigInteger getRegistrationDate()
     {
         return registrationDate;
     }
 
-    public void setRegistrationDate(long registrationDate)
+    public void setRegistrationDate(BigInteger registrationDate)
     {
         this.registrationDate = registrationDate;
     }
