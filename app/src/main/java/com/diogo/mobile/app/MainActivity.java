@@ -93,66 +93,70 @@ public class MainActivity extends AppCompatActivity implements ResultResponse
     @Override
     public void success(JsonRequest jsonRequest, JSONObject jsonObject)
     {
-        String strMethod;
-
-        switch(jsonRequest.getMethod())
-        {
-            case Request.Method.GET:
-            {
-                strMethod = "GET";
-                break;
-            }
-            case Request.Method.POST:
-            {
-                strMethod = "POST";
-                break;
-            }
-            case Request.Method.PUT:
-            {
-                strMethod = "PUT";
-                break;
-            }
-            case Request.Method.DELETE:
-            {
-                strMethod = "DELETE";
-                break;
-            }
-            case Request.Method.HEAD:
-            {
-                strMethod = "HEAD";
-                break;
-            }
-            case Request.Method.OPTIONS:
-            {
-                strMethod = "OPTIONS";
-                break;
-            }
-            case Request.Method.TRACE:
-            {
-                strMethod = "TRACE";
-                break;
-            }
-            case Request.Method.PATCH:
-            {
-                strMethod = "PATCH";
-                break;
-            }
-            default:
-            {
-                strMethod = "";
-                break;
-            }
-        }
-
-        textViewCode.setText(String.format("CODE: %d", jsonRequest.getResponseStatusCode()));
-        textViewMethod.setText(String.format("METHOD: %s", strMethod));
-        textViewJson.setText(new Gson().toJson(jsonObject));
-
         try
         {
-            textViewCliente.setText("[CLIENTE]");
-            textViewId.setText(String.format("ID: %d", jsonObject.getInt("id")));
-            textViewDate.setText(String.format("DATE: %s", DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.DEFAULT).format(jsonObject.getLong("registrationDate"))));
+            if(jsonObject.getInt("id") > 0)
+            {
+                String strMethod;
+
+                switch(jsonRequest.getMethod())
+                {
+                    case Request.Method.GET:
+                    {
+                        strMethod = "GET";
+                        break;
+                    }
+                    case Request.Method.POST:
+                    {
+                        strMethod = "POST";
+                        break;
+                    }
+                    case Request.Method.PUT:
+                    {
+                        strMethod = "PUT";
+                        break;
+                    }
+                    case Request.Method.DELETE:
+                    {
+                        strMethod = "DELETE";
+                        break;
+                    }
+                    case Request.Method.HEAD:
+                    {
+                        strMethod = "HEAD";
+                        break;
+                    }
+                    case Request.Method.OPTIONS:
+                    {
+                        strMethod = "OPTIONS";
+                        break;
+                    }
+                    case Request.Method.TRACE:
+                    {
+                        strMethod = "TRACE";
+                        break;
+                    }
+                    case Request.Method.PATCH:
+                    {
+                        strMethod = "PATCH";
+                        break;
+                    }
+                    default:
+                    {
+                        strMethod = "";
+                        break;
+                    }
+                }
+
+                textViewCode.setText(String.format("CODE: %d", jsonRequest.getResponseStatusCode()));
+                textViewMethod.setText(String.format("METHOD: %s", strMethod));
+                textViewJson.setText(new Gson().toJson(jsonObject));
+
+
+                textViewCliente.setText("[CLIENTE]");
+                textViewId.setText(String.format("ID: %d", jsonObject.getInt("id")));
+                textViewDate.setText(String.format("DATE: %s", DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.DEFAULT).format(jsonObject.getLong("registrationDate"))));
+            }
         }
         catch(JSONException e)
         {
