@@ -1,11 +1,11 @@
 package com.diogo.mobile.app.gcm;
 
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.media.RingtoneManager;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 
@@ -31,8 +31,7 @@ public class GCMListenerService extends GcmListenerService
         notification.setWhen(System.currentTimeMillis());
         notification.setAutoCancel(true);
 
-        notification.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
-        notification.setVibrate(new long[] { 1000, 1000, 1000, 1000, 1000 });
+        notification.setDefaults(Notification.DEFAULT_SOUND | Notification.DEFAULT_VIBRATE);
         notification.setLights(Color.RED, 3000, 3000);
 
         notification.setContentIntent(PendingIntent.getActivity(this, 0, new Intent(this, MainActivity.class), PendingIntent.FLAG_UPDATE_CURRENT));
