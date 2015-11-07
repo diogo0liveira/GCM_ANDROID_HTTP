@@ -1,6 +1,7 @@
 package com.diogo.mobile.app.network;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -82,7 +83,14 @@ public class NetworkConnection
             @Override
             public void onErrorResponse(VolleyError volleyError)
             {
-                resultResponse.error(volleyError);
+                if(volleyError.networkResponse != null)
+                {
+                    resultResponse.error(volleyError);
+                }
+                else
+                {
+                    Toast.makeText(context, "SERVER OFFLINE", Toast.LENGTH_LONG).show();
+                }
             }
         });
 

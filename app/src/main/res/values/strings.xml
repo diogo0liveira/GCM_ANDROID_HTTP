@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">GCM CLIENT HTTP</string>
+    <string name="app_name">GCM HTTP</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_result">RESULT</string>
     <string name="title_activity_sigle">SINGLE</string>
